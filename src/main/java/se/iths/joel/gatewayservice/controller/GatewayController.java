@@ -17,8 +17,8 @@ public class GatewayController {
     }
 
     @GetMapping ("/products")
-    public ResponseEntity<String> products(HttpServletRequest request) {
-        return proxyService.products(request.getHeader(HttpHeaders.AUTHORIZATION));
+    public ResponseEntity<String> products(@CookieValue(name ="access_token", required = false) String accessToken) {
+        return proxyService.products("Bearer" + accessToken);
     }
 
     @GetMapping("/products/{id}")
