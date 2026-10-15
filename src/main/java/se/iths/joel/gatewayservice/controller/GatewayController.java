@@ -17,8 +17,8 @@ public class GatewayController {
     }
 
     @GetMapping ("/products")
-    public ResponseEntity<String> products(HttpServletRequest request) {
-        return proxyService.products(request.getHeader(HttpHeaders.AUTHORIZATION));
+    public ResponseEntity<String> products(@CookieValue(name ="access_token", required = false) String accessToken) {
+        return proxyService.products("Bearer" + accessToken);
     }
 
     @GetMapping("/products/{id}")
@@ -33,10 +33,15 @@ public class GatewayController {
             @RequestBody String requestBody,
             HttpServletRequest request) {
 
-        return proxyService.login(
+        return (ResponseEntity<String>) proxyService.loginWithCookie(
                 requestBody,
                 request.getHeader(HttpHeaders.CONTENT_TYPE)
         );
+    }
+
+    @PostMapping("/auth/logout")
+    public ResponseEntity<Void> logout(){
+        return proxyService.logout();
     }
 
     @PostMapping("/orders")
@@ -50,6 +55,4 @@ public class GatewayController {
                 request.getHeader(HttpHeaders.CONTENT_TYPE)
         );
     }
-
-
 }
