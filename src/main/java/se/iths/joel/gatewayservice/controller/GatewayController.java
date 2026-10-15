@@ -39,6 +39,11 @@ public class GatewayController {
         );
     }
 
+    @PostMapping("/auth/logout")
+    public ResponseEntity<Void> logout(){
+        return proxyService.logout();
+    }
+
     @PostMapping("/orders")
     public ResponseEntity<String> createOrder(
             @RequestBody String requestBody,

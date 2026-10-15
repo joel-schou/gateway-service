@@ -28,6 +28,7 @@ public class GatewayProxyService {
     private final String orderServiceUrl;
     private final HttpClient httpClient;
     private final boolean cookieSecure;
+    private final String cookieSameSite;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -43,6 +44,7 @@ public class GatewayProxyService {
         this.orderServiceUrl = orderServiceUrl;
         this.httpClient = httpClient;
         this.cookieSecure = cookieSecure;
+        this.cookieSameSite = cookieSameSite;
     }
 
     // hjälpmetoder
@@ -231,6 +233,21 @@ public class GatewayProxyService {
             return ResponseEntity.status(502).body("Auth service returned invalid response.");
 
         }
+    }
+
+    public ResponseEntity<Void> logout() {
+        ResponseCookie cookie = ResponseCookie.from("access_token", "")
+                .httpOnly(true)
+                .secure(cookieSecure)
+                .sameSite(cookieSameSite)
+                .path("/")
+                .maxAge(Duration.ZERO)
+                .build();
+
+        return ResponseEntity
+                .noContent()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .build();
     }
 }
 
