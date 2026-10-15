@@ -33,7 +33,7 @@ public class GatewayController {
             @RequestBody String requestBody,
             HttpServletRequest request) {
 
-        return proxyService.login(
+        return (ResponseEntity<String>) proxyService.loginWithCookie(
                 requestBody,
                 request.getHeader(HttpHeaders.CONTENT_TYPE)
         );
@@ -50,6 +50,4 @@ public class GatewayController {
                 request.getHeader(HttpHeaders.CONTENT_TYPE)
         );
     }
-
-
 }
