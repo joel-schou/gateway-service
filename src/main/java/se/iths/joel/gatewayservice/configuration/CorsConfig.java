@@ -1,4 +1,4 @@
-package se.iths.joel.gatewayservice.client;
+package se.iths.joel.gatewayservice.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

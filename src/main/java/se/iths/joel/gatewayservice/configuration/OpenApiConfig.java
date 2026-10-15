@@ -1,4 +1,4 @@
-package se.iths.joel.gatewayservice.client;
+package se.iths.joel.gatewayservice.configuration;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
