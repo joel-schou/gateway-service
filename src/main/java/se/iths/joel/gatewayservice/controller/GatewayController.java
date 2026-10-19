@@ -16,9 +16,9 @@ public class GatewayController {
         this.proxyService = proxyService;
     }
 
-    @GetMapping ("/products")
-    public ResponseEntity<String> products(@CookieValue(name ="access_token", required = false) String accessToken) {
-        return proxyService.products("Bearer" + accessToken);
+    @GetMapping("/products")
+    public ResponseEntity<String> products(@CookieValue(name = "access_token", required = false) String accessToken) {
+        return proxyService.products("Bearer " + accessToken);
     }
 
     @GetMapping("/products/{id}")
@@ -41,7 +41,7 @@ public class GatewayController {
     }
 
     @PostMapping("/auth/logout")
-    public ResponseEntity<Void> logout(){
+    public ResponseEntity<Void> logout() {
         return proxyService.logout();
     }
 
