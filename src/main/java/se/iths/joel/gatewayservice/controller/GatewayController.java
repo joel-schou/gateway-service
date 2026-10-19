@@ -2,6 +2,7 @@ package se.iths.joel.gatewayservice.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.joel.gatewayservice.service.GatewayProxyService;
@@ -28,6 +29,13 @@ public class GatewayController {
         return response;
     }
 
+    @GetMapping("/auth/me")
+    public ResponseEntity<String> authMe(@CookieValue(name = "access_token", required = false) String accessToken) {
+        if (accessToken == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No access token provided");
+        }
+        return proxyService.authMe("Bearer " + accessToken);
+    }
 
     @PostMapping("/auth/login")
     public ResponseEntity<String> login(

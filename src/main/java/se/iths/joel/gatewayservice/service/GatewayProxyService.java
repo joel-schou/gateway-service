@@ -1,6 +1,5 @@
 package se.iths.joel.gatewayservice.service;
 
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,7 @@ public class GatewayProxyService {
 
     public ResponseEntity<String> products(String authorization) {
         ResponseEntity<String> getResponse = forwardGet(productServiceUrl, "/products", authorization);
-            return getResponse;
+        return getResponse;
 
     }
 
@@ -173,20 +172,20 @@ public class GatewayProxyService {
 
             return responseBuilder.body(response.body());
 
-        } catch(IOException exception) {
-                return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-                        .body("Kunde inte nå bakomliggande tjänst");
-            } catch(InterruptedException exception){
-                Thread.currentThread().interrupt();
-                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                        .body("Anropet avbröts");
-            }
-
+        } catch (IOException exception) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                    .body("Kunde inte nå bakomliggande tjänst");
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body("Anropet avbröts");
         }
 
+    }
+
     public ResponseEntity<?> loginWithCookie(String requestBody, String contentType) {
-        HttpRequest.Builder request=HttpRequest.newBuilder(
-                URI.create(authServerUrl+"/auth/login")
+        HttpRequest.Builder request = HttpRequest.newBuilder(
+                URI.create(authServerUrl + "/auth/login")
         ).header(HttpHeaders.CONTENT_TYPE, contentType).POST(
                 HttpRequest.BodyPublishers.ofString(requestBody)
         );
@@ -194,17 +193,17 @@ public class GatewayProxyService {
     }
 
     private ResponseEntity<?> sendLogin(HttpRequest.Builder request) {
-        try{
+        try {
             HttpResponse<String> response = httpClient.send(
                     request.build(), HttpResponse.BodyHandlers.ofString()
             );
 
-            if (response.statusCode() < 200 || response.statusCode() >= 300){
-                return  ResponseEntity.status(response.statusCode()).body(response.body());
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                return ResponseEntity.status(response.statusCode()).body(response.body());
             }
             return createLoginResponse(response.body());
-        }catch (IOException | InterruptedException ex){
-            if (ex instanceof InterruptedException){
+        } catch (IOException | InterruptedException ex) {
+            if (ex instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
             }
             return ResponseEntity.status(502)
@@ -228,8 +227,7 @@ public class GatewayProxyService {
             );
 
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(loginResponse);
-        }
-        catch (JacksonException ex){
+        } catch (JacksonException ex) {
             return ResponseEntity.status(502).body("Auth service returned invalid response.");
 
         }
@@ -248,6 +246,10 @@ public class GatewayProxyService {
                 .noContent()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .build();
+    }
+
+    public ResponseEntity<String> authMe(String authorization) {
+        return forwardGet(authServerUrl, "/auth/me", authorization);
     }
 }
 
