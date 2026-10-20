@@ -248,8 +248,8 @@ public class GatewayProxyService {
                 .build();
     }
 
-    public ResponseEntity<String> authMe(String authorization) {
-        return forwardGet(authServerUrl, "/auth/me", authorization);
+    public ResponseEntity<String> session(String accessToken) {
+        return forwardGet(authServerUrl, "/auth/me", "Bearer " + accessToken);
     }
 }
 
