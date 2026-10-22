@@ -19,17 +19,17 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/gateway/**")
-                .allowedOrigins("http://localhost:5173", "http://localhost:5174")
+                .allowedOrigins("http://localhost:5173", "http://localhost:5174", "https://webshop-frontend-6s3c.onrender.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Content-Type", "Authorization")
                 .allowCredentials(true);
 
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-                "http://localhost:5173",
-                "https://webshop-frontend-6s3c.onrender.com"
-        ));
-        config.setAllowCredentials(true);
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of(
+//                "http://localhost:5173",
+//                "https://webshop-frontend-6s3c.onrender.com"
+//        ));
+//        config.setAllowCredentials(true);
     }
 
     @Bean
