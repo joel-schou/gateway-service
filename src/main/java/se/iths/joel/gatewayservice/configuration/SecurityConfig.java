@@ -27,7 +27,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://frontend.onrender.com"
+                "https://webshop-frontend-6s3c.onrender.com/login"
         ));
         config.setAllowCredentials(true);
     }
