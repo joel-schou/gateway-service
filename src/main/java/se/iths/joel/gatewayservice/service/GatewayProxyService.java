@@ -217,6 +217,7 @@ public class GatewayProxyService {
             ResponseCookie cookie = ResponseCookie.from("access_token", authServiceResponse.accessToken())
                     .httpOnly(true)
                     .secure(cookieSecure)
+                    .sameSite(cookieSameSite)
                     .path("/")
                     .maxAge(Duration.ofSeconds(authServiceResponse.expiresIn())).build();
 
