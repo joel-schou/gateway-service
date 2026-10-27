@@ -22,10 +22,11 @@ public class GatewayController {
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<String> productById(@PathVariable Long id, HttpServletRequest request) {
-        ResponseEntity<String> response = proxyService.productById(id, request.getHeader(HttpHeaders.AUTHORIZATION));
+    public ResponseEntity<String> productById(
+            @PathVariable Long id,
+            @CookieValue(name = "access_token", required = false) String access_Token) {
 
-        return response;
+        return proxyService.productById(id, access_Token);
     }
 
     @GetMapping("/auth/me")

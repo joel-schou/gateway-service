@@ -113,10 +113,9 @@ public class GatewayProxyService {
 
 
     // crud metoder
-    public ResponseEntity<String> productById(Long id, String authorization) {
-        ResponseEntity<String> getResponse = forwardGet(productServiceUrl, "/products/" + id, authorization);
+    public ResponseEntity<String> productById(Long id, String accessToken) {
+    return forwardGet(productServiceUrl, "/products/" + id, "Bearer " + accessToken);
 
-        return getResponse;
 
     }
 
