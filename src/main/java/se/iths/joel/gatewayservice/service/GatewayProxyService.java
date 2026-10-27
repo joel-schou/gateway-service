@@ -252,6 +252,11 @@ public class GatewayProxyService {
     public ResponseEntity<String> session(String accessToken) {
         return forwardGet(authServerUrl, "/auth/me", "Bearer " + accessToken);
     }
+
+    public ResponseEntity<String> addProduct(String body, String authHeader, String contentType) {
+        return forwardPost(productServiceUrl, "/products", body, authHeader, contentType);
+
+    }
 }
 
 

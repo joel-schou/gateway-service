@@ -52,12 +52,32 @@ public class GatewayController {
     @PostMapping("/orders")
     public ResponseEntity<String> createOrder(
             @RequestBody String requestBody,
-            HttpServletRequest request) {
+        @CookieValue(name = "access_token", required = false) String accessToken,
+                HttpServletRequest request) {
+
 
         return proxyService.createOrder(
                 requestBody,
-                request.getHeader(HttpHeaders.AUTHORIZATION),
+                "Bearer " + accessToken,
                 request.getHeader(HttpHeaders.CONTENT_TYPE)
         );
     }
+
+    @PostMapping("/add-products")
+    public ResponseEntity<String> addProduct(
+            @RequestBody String requestBody,
+            @CookieValue(name = "access_token", required = false)
+            String accessToken,
+            HttpServletRequest request) {
+
+        return proxyService.addProduct(
+                requestBody,
+                "Bearer " + accessToken,
+                request.getHeader(HttpHeaders.CONTENT_TYPE)
+        );
+
+    }
+
+
+
 }
