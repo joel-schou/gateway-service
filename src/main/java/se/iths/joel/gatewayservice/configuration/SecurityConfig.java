@@ -12,6 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/**
+ * Konfigurerar CORS och CSRF för gatewayns HTTP-anrop.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {

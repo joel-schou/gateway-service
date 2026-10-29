@@ -19,6 +19,9 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 
+/**
+ * Vidarebefordrar anrop till bakomliggande tjänster och hanterar inloggningscookien.
+ */
 @Service
 public class GatewayProxyService {
 

@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import java.net.http.HttpClient;
 import java.time.Duration;
 
+/**
+ * Konfigurerar HTTP-klienten som används för anrop till bakomliggande tjänster.
+ */
 @Configuration
 public class HttpClientConfig {
     @Bean

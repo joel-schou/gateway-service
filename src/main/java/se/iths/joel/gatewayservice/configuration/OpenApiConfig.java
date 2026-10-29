@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+/**
+ * Konfigurerar OpenAPI-dokumentationen och bearer-token i Swagger UI.
+ */
 @Configuration
 public class OpenApiConfig {
 
