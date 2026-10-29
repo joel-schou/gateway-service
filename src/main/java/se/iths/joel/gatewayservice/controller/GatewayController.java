@@ -79,6 +79,20 @@ public class GatewayController {
 
     }
 
+    @PostMapping("/payments/create-intent")
+    public ResponseEntity<String> createPaymentIntent(
+            @RequestBody String requestBody,
+            @CookieValue(name = "access_token", required = false) String accessToken,
+            HttpServletRequest request) {
+
+        return proxyService.createPaymentIntent(
+                requestBody,
+                "Bearer " + accessToken,
+                 request.getHeader(HttpHeaders.CONTENT_TYPE)
+        );
+    }
+
+
 
 
 }
