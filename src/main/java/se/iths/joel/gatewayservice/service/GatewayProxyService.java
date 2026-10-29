@@ -36,7 +36,7 @@ public class GatewayProxyService {
             @Value("${app.auth-server-url}") String authServerUrl,
             @Value("${app.product-service-url}") String productServiceUrl,
             @Value("${app.order-service-url}") String orderServiceUrl,
-            @Value("{app.payment-service-url}") String paymentServiceUrl,
+            @Value("${app.payment-service-url}") String paymentServiceUrl,
             @Value("${COOKIE_SAME_SITE:Lax}") String cookieSameSite,
             @Value("${COOKIE_SECURE:false}") boolean cookieSecure,
             HttpClient httpClient) {
