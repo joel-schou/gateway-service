@@ -25,6 +25,7 @@ public class GatewayProxyService {
     private final String authServerUrl;
     private final String productServiceUrl;
     private final String orderServiceUrl;
+    private final String paymentServiceUrl;
     private final HttpClient httpClient;
     private final boolean cookieSecure;
     private final String cookieSameSite;
@@ -35,12 +36,14 @@ public class GatewayProxyService {
             @Value("${app.auth-server-url}") String authServerUrl,
             @Value("${app.product-service-url}") String productServiceUrl,
             @Value("${app.order-service-url}") String orderServiceUrl,
+            @Value("{app.payment-service-url}") String paymentServiceUrl,
             @Value("${COOKIE_SAME_SITE:Lax}") String cookieSameSite,
             @Value("${COOKIE_SECURE:false}") boolean cookieSecure,
             HttpClient httpClient) {
         this.authServerUrl = authServerUrl;
         this.productServiceUrl = productServiceUrl;
         this.orderServiceUrl = orderServiceUrl;
+        this.paymentServiceUrl = paymentServiceUrl;
         this.httpClient = httpClient;
         this.cookieSecure = cookieSecure;
         this.cookieSameSite = cookieSameSite;
@@ -255,6 +258,20 @@ public class GatewayProxyService {
     public ResponseEntity<String> addProduct(String body, String authHeader, String contentType) {
         return forwardPost(productServiceUrl, "/products", body, authHeader, contentType);
 
+    }
+
+    public ResponseEntity<String> createPaymentIntent(
+            String requestBody,
+            String authorization,
+            String contentType
+    ) {
+        return forwardPost(
+                paymentServiceUrl,
+                "/api/payments/create-intent",
+                 requestBody,
+                authorization,
+                contentType
+        );
     }
 }
 
