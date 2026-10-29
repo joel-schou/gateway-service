@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.iths.joel.gatewayservice.service.GatewayProxyService;
 
+/**
+ * Tar emot frontendens anrop och skickar dem vidare till gatewayns proxytjänst.
+ */
 @RestController
 @RequestMapping("/gateway")
 public class GatewayController {
