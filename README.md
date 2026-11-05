@@ -54,4 +54,6 @@ Order-service: https://github.com/klasen98/projekt-order-service
 
 E-mail-service: https://github.com/joel-schou/email-service
 
+Payment-service: https://github.com/Joajak92/payment-service
+
 Frontend: https://github.com/Joajak92/webshop-frontend
